@@ -1236,7 +1236,7 @@ async function doAnalyze() {
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-3-5-sonnet-20241022",max_tokens:1200,messages:[{role:"user",content:prompt}]})
+      body:JSON.stringify({model:"claude-3-haiku-20240307",max_tokens:1200,messages:[{role:"user",content:prompt}]})
     });
     clearInterval(iv);
     if (!res.ok) throw new Error(res.status);
@@ -1344,7 +1344,7 @@ async function fetchPlan(selTxt, shotLabel, score, feedback, goalName) {
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-3-5-sonnet-20241022",max_tokens:1200,messages:[{role:"user",content:prompt}]})
+      body:JSON.stringify({model:"claude-3-haiku-20240307",max_tokens:1200,messages:[{role:"user",content:prompt}]})
     });
     if (!res.ok) throw new Error(res.status);
     var data = await res.json();
@@ -1541,7 +1541,7 @@ async function fetchQuickFix(shotLabel, feedback, goalName) {
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-3-5-sonnet-20241022",max_tokens:300,messages:[{role:"user",content:prompt}]})
+      body:JSON.stringify({model:"claude-3-haiku-20240307",max_tokens:300,messages:[{role:"user",content:prompt}]})
     });
     if (!res.ok) throw new Error(res.status);
     var data = await res.json();
