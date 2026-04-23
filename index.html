@@ -1231,6 +1231,8 @@ async function doAnalyze() {
   }
 
   try {
+    console.log("Calling worker:", "https://sportyai.ale-pedroza255.workers.dev");
+    console.log("Prompt length:", prompt.length);
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -1247,7 +1249,8 @@ async function doAnalyze() {
     clearInterval(iv);
     document.getElementById("az-loading").style.display = "none";
     document.getElementById("az-error").style.display = "block";
-    document.getElementById("az-err-msg").textContent = "Something went wrong. Please try again. (Note: video upload analysis requires hosting on a web server like Netlify)";
+    document.getElementById("az-err-msg").textContent = "Error: " + err.message + " | Status: " + (err.status || "unknown") + " | Check console for details";
+    console.error("Full error:", err);
     document.getElementById("az-btn").disabled = false;
   }
 }
@@ -1328,6 +1331,8 @@ async function fetchPlan(selTxt, shotLabel, score, feedback, goalName) {
   var planContext = mode === "goal" ? "Their goal is to improve " + goalName + ". " : "";
   var prompt = "You are an elite sports coach. An athlete scored " + score + "/100 on their " + shotLabel + " in " + SPORTS[curSport].name + ". " + planContext + "Their main weaknesses are: " + weaknesses + ". Create a specific 1-month improvement plan. Return ONLY valid JSON no markdown: {\"overview\":\"<2 sentences>\",\"weeks\":[{\"week\":1,\"focus\":\"<title>\",\"drills\":[\"<drill1>\",\"<drill2>\",\"<drill3>\"]},{\"week\":2,\"focus\":\"<title>\",\"drills\":[\"<d>\",\"<d>\",\"<d>\"]},{\"week\":3,\"focus\":\"<title>\",\"drills\":[\"<d>\",\"<d>\",\"<d>\"]},{\"week\":4,\"focus\":\"<title>\",\"drills\":[\"<d>\",\"<d>\",\"<d>\"]}],\"daily_schedule\":[{\"day\":\"Mon\",\"session\":\"<20-30 min session>\"},{\"day\":\"Tue\",\"session\":\"<session>\"},{\"day\":\"Wed\",\"session\":\"<session>\"},{\"day\":\"Thu\",\"session\":\"<session>\"},{\"day\":\"Fri\",\"session\":\"<session>\"},{\"day\":\"Sat\",\"session\":\"<session>\"},{\"day\":\"Sun\",\"session\":\"Rest and recovery\"}],\"target_score\":<score+10 to score+18>}";
   try {
+    console.log("Calling worker:", "https://sportyai.ale-pedroza255.workers.dev");
+    console.log("Prompt length:", prompt.length);
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
@@ -1515,6 +1520,8 @@ async function fetchQuickFix(shotLabel, feedback, goalName) {
   var faults = (feedback || []).filter(function(f) { return f.type === "warn" || f.type === "bad"; }).map(function(f) { return f.title; }).join(", ");
   var prompt = "You are an elite sports coach. An athlete just finished analyzing their " + shotLabel + " in " + SPORTS[curSport].name + ". " + context + "Their main issues are: " + faults + ". Give them 3 ultra-specific quick fixes they can do RIGHT NOW. Each must be one clear actionable sentence specific to " + shotLabel + ". Return ONLY valid JSON: " + JSON.stringify({format:"array of 3 fix strings"}) + " like this: {list:[fix1,fix2,fix3]}";
   try {
+    console.log("Calling worker:", "https://sportyai.ale-pedroza255.workers.dev");
+    console.log("Prompt length:", prompt.length);
     var res = await fetch("https://sportyai.ale-pedroza255.workers.dev", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
